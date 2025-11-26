@@ -1,4 +1,5 @@
 import {Router, Routes, Route} from 'react-router'
+import styles from './App.module.css'
 
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -13,11 +14,11 @@ import Details from './components/Details';
 export default function App() {
 
     return (
-        <>
+        <div className={styles.page}>
 
             <Header/>
 
-            <main>
+            <main className={styles.main}>
                 <Routes>
                     <Route path='/login' element={<Login/>}/>
                     <Route path='/register' element={<Register/>}/>
@@ -33,6 +34,6 @@ export default function App() {
 
             <Footer/>
      
-        </>
+        </div>
     )
 }

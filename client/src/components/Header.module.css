@@ -1,0 +1,30 @@
+.header {
+    width:100%;
+    background-color: #f5f0e5;
+    color: #584b44;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logoLink {
+    height: 3rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.logo{
+    height: 4rem;
+    width: auto;
+}
+
+.div a{
+    text-decoration: none;
+    color: inherit;
+    padding:0.5rem;
+    font-weight: bold;
+}

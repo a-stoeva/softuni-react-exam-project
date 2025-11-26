@@ -1,7 +1,9 @@
+import styles from './Footer.module.css'
+
 export default function Footer() {
     return (
-        <>
-        <h1>Footer Page</h1>
-        </>
+        <footer className={styles.copyright}>
+            &copy; 2025 Wedding Helper. All rights reserved.
+        </footer>
     )
 }

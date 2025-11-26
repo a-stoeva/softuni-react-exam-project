@@ -11,6 +11,7 @@ import styles from './Header.module.css'
 
                 <div className={styles.div}>
                 <Link to='/catalog'>Catalog</Link>
+                <Link to='/create'>Create Post</Link>
                 <Link to='/login'>Login</Link>
                 <Link to='/register'>Register</Link>
                 <Link to='/'>Logout</Link>

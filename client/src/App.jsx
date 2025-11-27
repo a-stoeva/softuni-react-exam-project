@@ -1,4 +1,4 @@
-import {Router, Routes, Route} from 'react-router'
+import {Routes, Route} from 'react-router'
 import styles from './App.module.css'
 
 import Footer from "./components/Footer";

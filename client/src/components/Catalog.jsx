@@ -13,13 +13,17 @@ export default function Catalog() {
     }, [])
 
     return (
-        <>
+        <section>
             <h2>Catalog Page</h2>
+
+            {items.length === 0 && <h3>No added posts yet!</h3>}
+
             <div>
                 {items.map(item => (
                     <ItemCard key={item.id} item={item} />
                 ))}
             </div>
-        </>
+ 
+        </section>
     )
 }

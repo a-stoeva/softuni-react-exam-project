@@ -27,7 +27,7 @@ export default function App() {
                     <Route path='/catalog' element={<Catalog/>}/>
                     <Route path='/create' element={<Create/>}/>
                     <Route path='/edit' element={<Edit/>}/>
-                    <Route path='/details' element={<Details/>}/>
+                    <Route path='/catalog/:postId/details' element={<Details/>}/>
                 </Routes>
 
             </main>

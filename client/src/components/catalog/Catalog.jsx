@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import ItemCard from "./ItemCard";
+import ItemCard from "../item/ItemCard";
 
 export default function Catalog() {
 
@@ -8,7 +8,7 @@ export default function Catalog() {
     useEffect(() => {
         fetch('http://localhost:3030/jsonstore/weddingHelper')
             .then(res => res.json())
-            .then(data => setItems(data.weddingHelper))
+            .then(data => setItems(Object.values(data.weddingHelper)))
             .catch(err => console.error(err));
     }, [])
 
@@ -20,7 +20,7 @@ export default function Catalog() {
 
             <div>
                 {items.map(item => (
-                    <ItemCard key={item.id} item={item} />
+                    <ItemCard key={item._id} item={item} />
                 ))}
             </div>
  

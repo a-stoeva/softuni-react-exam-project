@@ -7,9 +7,8 @@ import Home from './components/home/Home';
 import Catalog from './components/catalog/Catalog';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
-import Create from './components/create/Create';
-import Edit from './components/edit/Edit';
 import Details from './components/details/Details';
+import CreateEdit from './components/createEdit/CreateEdit';
 
 export default function App() {
 
@@ -25,8 +24,8 @@ export default function App() {
 
                     <Route path='/' element={<Home/>}/>
                     <Route path='/catalog' element={<Catalog/>}/>
-                    <Route path='/create' element={<Create/>}/>
-                    <Route path='/edit' element={<Edit/>}/>
+                    <Route path='/create' element={<CreateEdit/>}/>
+                    <Route path='/catalog/:postId/edit' element={<CreateEdit/>}/>
                     <Route path='/catalog/:postId/details' element={<Details/>}/>
                 </Routes>
 

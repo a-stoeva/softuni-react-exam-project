@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import styles from "./CreateEdit.module.css";
+import request from "../../hooks/useFetch";
+import useControlledForm from "../../hooks/useControlledForm";
 
 export default function CreateEdit() {
     const { postId } = useParams();
@@ -19,47 +21,44 @@ export default function CreateEdit() {
         availability: '',
     }
 
-    const [formData, setFormData] = useState(initialValues);
+    const onSubmit = async (data) => {
+
+    const url = isEdit
+        ? `http://localhost:3030/jsonstore/weddingHelper/weddingHelper/${postId}`
+        : `http://localhost:3030/jsonstore/weddingHelper/weddingHelper`;
+
+    const method = isEdit ? "PUT" : "POST";
+
+    request(url, method, data)
+    .then(result => navigate(`/catalog/${result._id}/details`))
+    .catch(err => alert(err.message))
+    };
+
+    const { formData, changeHandler, submitHandler, error, setFormData } = useControlledForm(initialValues, onSubmit);
+
+
+    // const [formData, setFormData] = useState(initialValues);
 
     useEffect(() => {
         if (isEdit) {
-            fetch(`http://localhost:3030/jsonstore/weddingHelper/weddingHelper/${postId}`)
-                .then(res => res.json())
-                .then(data => setFormData(data))
+            request(`http://localhost:3030/jsonstore/weddingHelper/weddingHelper/${postId}`)
+                .then(result => setFormData(result))
                 .catch(err => console.error(err));
         }
-    }, [isEdit, postId]);
+    }, [isEdit, postId, setFormData]);
 
-    const changeHandler = (e) => {
-        setFormData(state => ({
-            ...state,
-            [e.target.name]: e.target.value,
-        }));
-    };
-
-const submitHandler = async (e) => {
-    e.preventDefault();
-
-    try {
-        const method = isEdit ? "PUT" : "POST";
-        const url = isEdit
-            ? `http://localhost:3030/jsonstore/weddingHelper/weddingHelper/${postId}`
-            : `http://localhost:3030/jsonstore/weddingHelper/weddingHelper`;
-
-        const res = await fetch(url, {
-            method,
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData)
-        });
-
-        const data = await res.json();
-
-        navigate(`/catalog/${data._id}/details`);
-
-    } catch (err) {
-        alert(err.message);
+    useEffect(() => {
+    if (error) {
+        alert(error);
     }
-};
+    }, [error]);
+
+    // const changeHandler = (e) => {
+    //     setFormData(state => ({
+    //         ...state,
+    //         [e.target.name]: e.target.value,
+    //     }));
+    // };
 
     return (
         <div className={styles.wrapper}>
@@ -67,7 +66,7 @@ const submitHandler = async (e) => {
                 {isEdit ? "Edit Post" : "Create New Post"}
             </h2>
 
-            <form className={styles.form} onSubmit={submitHandler}>
+            <form className={styles.form} action={submitHandler}>
                 <label className={styles.label}>Title</label>
                 <input className={styles.input} name="title" value={formData.title} onChange={changeHandler} required />
 

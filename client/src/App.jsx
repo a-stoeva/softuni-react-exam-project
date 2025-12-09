@@ -9,10 +9,12 @@ import Login from './components/login/Login';
 import Register from './components/register/Register';
 import Details from './components/details/Details';
 import CreateEdit from './components/createEdit/CreateEdit';
+import {UserProvider} from './contexts/UserContextFile';
 
 export default function App() {
 
     return (
+        <UserProvider>
         <div className={styles.page}>
 
             <Header/>
@@ -34,5 +36,6 @@ export default function App() {
             <Footer/>
      
         </div>
+        </UserProvider>
     )
 }

@@ -2,17 +2,19 @@ import {useState, useEffect} from 'react';
 import ItemCard from "../item/ItemCard";
 
 import styles from "./Catalog.module.css";
+import useRequest from '../../hooks/useRequest';
 
 export default function Catalog() {
 
     const [items, setItems] = useState([]);
+    const request = useRequest();
 
     useEffect(() => {
-        fetch('http://localhost:3030/jsonstore/weddingHelper')
-            .then(res => res.json())
-            .then(data => setItems(Object.values(data.weddingHelper)))
+        request('http://localhost:3030/data/weddingHelper')
+            .then(data => {
+                setItems(Object.values(data))})
             .catch(err => console.error(err));
-    }, [])
+    }, [request])
 
     return (
         <section className={styles.catalogSection}>

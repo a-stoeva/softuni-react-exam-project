@@ -22,9 +22,15 @@
     width: auto;
 }
 
-.div a{
+.div a, 
+.div button{
     text-decoration: none;
     color: inherit;
     padding:0.5rem;
     font-weight: bold;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
 }

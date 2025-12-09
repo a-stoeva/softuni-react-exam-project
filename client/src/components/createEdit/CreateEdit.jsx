@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import styles from "./CreateEdit.module.css";
-import request from "../../hooks/useFetch";
 import useControlledForm from "../../hooks/useControlledForm";
+import useRequest from "../../hooks/useRequest";
 
 export default function CreateEdit() {
     const { postId } = useParams();
     const navigate = useNavigate();
+    const request = useRequest()
 
     const isEdit = Boolean(postId);
 
@@ -21,44 +22,37 @@ export default function CreateEdit() {
         availability: '',
     }
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (formData) => {
 
     const url = isEdit
-        ? `http://localhost:3030/jsonstore/weddingHelper/weddingHelper/${postId}`
-        : `http://localhost:3030/jsonstore/weddingHelper/weddingHelper`;
+        ? `http://localhost:3030/data/weddingHelper/${postId}`
+        : `http://localhost:3030/data/weddingHelper`;
 
     const method = isEdit ? "PUT" : "POST";
 
-    request(url, method, data)
-    .then(result => navigate(`/catalog/${result._id}/details`))
-    .catch(err => alert(err.message))
+    try { 
+    const result = await request(url, method, { ...formData })
+    navigate(`/catalog/${result._id}/details`)
+    } catch (err) {
+        alert(err.message)
+    };
     };
 
     const { formData, changeHandler, submitHandler, error, setFormData } = useControlledForm(initialValues, onSubmit);
 
-
-    // const [formData, setFormData] = useState(initialValues);
-
     useEffect(() => {
         if (isEdit) {
-            request(`http://localhost:3030/jsonstore/weddingHelper/weddingHelper/${postId}`)
+            request(`http://localhost:3030/data/weddingHelper/${postId}`)
                 .then(result => setFormData(result))
                 .catch(err => console.error(err));
         }
-    }, [isEdit, postId, setFormData]);
+    }, [isEdit, postId, setFormData, request]);
 
     useEffect(() => {
     if (error) {
         alert(error);
     }
     }, [error]);
-
-    // const changeHandler = (e) => {
-    //     setFormData(state => ({
-    //         ...state,
-    //         [e.target.name]: e.target.value,
-    //     }));
-    // };
 
     return (
         <div className={styles.wrapper}>

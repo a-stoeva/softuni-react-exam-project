@@ -1,7 +1,28 @@
 import { Link } from "react-router";
-import styles from './Header.module.css'
+import styles from './Header.module.css';
+import { useUser } from "../../contexts/UserContextFile";
 
     export default function Header() {
+
+        const {user, logout, token} = useUser();
+
+        const logoutHandler = async () => {
+            try {
+
+                await fetch("http://localhost:3030/users/logout",{
+                    method: "GET",
+                    headers: {
+                        "X-Authorization": token
+                    }
+                });   
+                        
+                logout();
+
+            } catch (err) {
+                alert(err.message);
+            }
+        };
+
         return (
         <header className={styles.header}>
             <nav className={styles.nav}>
@@ -10,11 +31,21 @@ import styles from './Header.module.css'
                 </Link>
 
                 <div className={styles.div}>
+                <Link to='/'>Home</Link>
                 <Link to='/catalog'>Catalog</Link>
-                <Link to='/create'>Create Post</Link>
-                <Link to='/login'>Login</Link>
-                <Link to='/register'>Register</Link>
-                <Link to='/'>Logout</Link>
+
+                {!user && (
+                    <>
+                        <Link to='/login'>Login</Link>
+                        <Link to='/register'>Register</Link>
+                    </>)}
+
+                    {user && (
+                        <>
+                            <Link to='/create'>Create Post</Link>
+                            <button onClick={logoutHandler}>Logout</button>
+                        </>
+                    )}
                 </div>
             </nav>
         </header>

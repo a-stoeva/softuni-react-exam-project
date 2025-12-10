@@ -32,7 +32,7 @@ export default function CreateEdit() {
 
     try { 
     const result = await request(url, method, { ...formData })
-    navigate(`/catalog/${result._id}/details`)
+    navigate(`/catalog/${result._id}`)
     } catch (err) {
         alert(err.message)
     };

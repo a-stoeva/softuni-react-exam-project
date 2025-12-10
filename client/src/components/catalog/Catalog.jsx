@@ -11,8 +11,7 @@ export default function Catalog() {
 
     useEffect(() => {
         request('http://localhost:3030/data/weddingHelper')
-            .then(data => {
-                setItems(Object.values(data))})
+            .then(data => setItems(data))
             .catch(err => console.error(err));
     }, [request])
 

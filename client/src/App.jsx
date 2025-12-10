@@ -10,6 +10,7 @@ import Register from './components/register/Register';
 import Details from './components/details/Details';
 import CreateEdit from './components/createEdit/CreateEdit';
 import {UserProvider} from './contexts/UserContextFile';
+import MyPosts from './components/myPosts/myPosts';
 
 export default function App() {
 
@@ -29,6 +30,7 @@ export default function App() {
                     <Route path='/create' element={<CreateEdit/>}/>
                     <Route path='/catalog/:postId/edit' element={<CreateEdit/>}/>
                     <Route path='/catalog/:postId/details' element={<Details/>}/>
+                    <Route path='/myPosts' element={<MyPosts/>}/>
                 </Routes>
 
             </main>

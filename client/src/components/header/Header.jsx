@@ -15,7 +15,7 @@ import { useUser } from "../../contexts/UserContextFile";
                         "X-Authorization": token
                     }
                 });   
-                        
+
                 logout();
 
             } catch (err) {
@@ -42,6 +42,7 @@ import { useUser } from "../../contexts/UserContextFile";
 
                     {user && (
                         <>
+                            <Link to="/myPosts">My Posts</Link>
                             <Link to='/create'>Create Post</Link>
                             <button onClick={logoutHandler}>Logout</button>
                         </>

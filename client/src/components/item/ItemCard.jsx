@@ -9,7 +9,7 @@ export default function ItemCard({item}) {
             <p className={styles.text}>Category: <span>{item.category}</span></p>
             <p className={styles.text}>Price: <span>{item.price}€</span></p>
             <p className={styles.text}>Location: <span>{item.location}</span></p>
-            <Link to={`/catalog/${item._id}/details`} className={styles.button}>More details</Link>
+            <Link to={`/catalog/${item._id}`} className={styles.button}>More details</Link>
         </div>
     )
 }

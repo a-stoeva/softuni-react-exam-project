@@ -32,7 +32,7 @@ export default function App() {
                     
                     <Route path='/create' element={<RouteGuard><CreateEdit/></RouteGuard>}/>
                     <Route path='/catalog/:postId/edit' element={<OwnerGuard><CreateEdit/></OwnerGuard>}/>
-                    <Route path='/catalog/:postId/details' element={<RouteGuard><Details/></RouteGuard>}/>
+                    <Route path='/catalog/:postId' element={<Details/>}/>
                     <Route path='/myPosts' element={<RouteGuard><MyPosts/></RouteGuard>}/>
                     
                 </Routes>

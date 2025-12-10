@@ -5,10 +5,17 @@ export default function useRequest() {
     const { token } = useUser();
 
     const request = useCallback(async (url, method = "GET", data) => {
-        const options = { method };
-        options.headers = { "Content-Type": "application/json" };
-        if (token) options.headers["X-Authorization"] = token;
-        if (data) options.body = JSON.stringify(data);
+        const options = { method, headers: {} };
+
+        if (token) {
+            options.headers["X-Authorization"] = token;
+        }
+        if (data) {
+            options.headers = { "Content-Type": "application/json" };
+            options.body = JSON.stringify(data)
+        };
+
+        console.log(url)
 
         const response = await fetch(url, options);
         if (!response.ok) {
@@ -16,7 +23,11 @@ export default function useRequest() {
             throw new Error(err.message);
         }
 
-        return await response.json();
+        const result = await response.json();
+        console.log(result);
+        
+
+        return result;
     }, [token]);
 
     return request;

@@ -14,6 +14,9 @@ export default function Details() {
     const request = useRequest();
 
     useEffect(() => {
+
+        if(!postId) return;
+        
         request(`http://localhost:3030/data/weddingHelper/${postId}`)
             .then(data => setPost(data))
             .catch(err => console.error(err));       

@@ -39,5 +39,7 @@ This project follows the SoftUni React Project Assignment Requirements (2025).
         npm run dev
         
   4.2. Install and run backend:
-    npm install
-    node index.js
+      npm install
+      npm run client
+      npm run build
+      node index.js

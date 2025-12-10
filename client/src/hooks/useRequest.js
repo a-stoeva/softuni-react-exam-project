@@ -11,7 +11,7 @@ export default function useRequest() {
             options.headers["X-Authorization"] = token;
         }
         if (data) {
-            options.headers = { "Content-Type": "application/json" };
+            options.headers["Content-Type"] = "application/json";
             options.body = JSON.stringify(data)
         };
 

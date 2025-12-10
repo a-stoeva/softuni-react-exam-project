@@ -4,6 +4,7 @@ import { useUser } from "../../contexts/UserContextFile";
 
 import styles from "./Details.module.css"
 import useRequest from "../../hooks/useRequest";
+import LikeButton from "../likeButton/LikeButton";
 
 export default function Details() {
 
@@ -16,7 +17,7 @@ export default function Details() {
     useEffect(() => {
 
         if(!postId) return;
-        
+
         request(`http://localhost:3030/data/weddingHelper/${postId}`)
             .then(data => setPost(data))
             .catch(err => console.error(err));       
@@ -48,6 +49,7 @@ export default function Details() {
                     <p className={styles.text}>Location: <span>{post.location}</span></p>
                     <p className={styles.text}>Availability: <span>{post.availability}</span></p>
                 
+                <LikeButton postId={postId}  ownerId={post._ownerId} />
 
                 {isOwner && 
                 <div className={styles.buttons}>
@@ -55,6 +57,7 @@ export default function Details() {
                     <button className={styles.button} onClick={deleteClickHandler}>Delete Post</button>
                 </div>
                 }
+
                 </div>
 
             </div>

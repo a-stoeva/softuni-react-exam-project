@@ -11,6 +11,7 @@ import Details from './components/details/Details';
 import CreateEdit from './components/createEdit/CreateEdit';
 import {UserProvider} from './contexts/UserContextFile';
 import MyPosts from './components/myPosts/myPosts';
+import RouteGuard from './components/routeGuard/RouteGuard';
 
 export default function App() {
 
@@ -27,10 +28,12 @@ export default function App() {
 
                     <Route path='/' element={<Home/>}/>
                     <Route path='/catalog' element={<Catalog/>}/>
-                    <Route path='/create' element={<CreateEdit/>}/>
-                    <Route path='/catalog/:postId/edit' element={<CreateEdit/>}/>
-                    <Route path='/catalog/:postId/details' element={<Details/>}/>
-                    <Route path='/myPosts' element={<MyPosts/>}/>
+                    
+                    <Route path='/create' element={<RouteGuard><CreateEdit/></RouteGuard>}/>
+                    <Route path='/catalog/:postId/edit' element={<RouteGuard><CreateEdit/></RouteGuard>}/>
+                    <Route path='/catalog/:postId/details' element={<RouteGuard><Details/></RouteGuard>}/>
+                    <Route path='/myPosts' element={<RouteGuard><MyPosts/></RouteGuard>}/>
+                    
                 </Routes>
 
             </main>

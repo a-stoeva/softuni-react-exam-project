@@ -15,8 +15,6 @@ export default function useRequest() {
             options.body = JSON.stringify(data)
         };
 
-        console.log(url)
-
         const response = await fetch(url, options);
         if (!response.ok) {
             const err = await response.json();
